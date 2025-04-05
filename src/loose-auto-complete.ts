@@ -1,8 +1,8 @@
-/** this file is to test how to avoid loose auto-complete  in typescript*/
+/** this file is to test how to build loose auto-complete  in typescript*/
 
-type LoozedSizeType = "small" | "large" | string;
+type SizeType = "small" | "large" | string;
 
-function getNumber(size: LoozedSizeType): number {
+function getNumber(size: SizeType): number {
   // return number beased on size if large number return large number
   if (size == "large") {
     return 10;
@@ -15,7 +15,7 @@ function getNumber(size: LoozedSizeType): number {
 // getNumber("");
 
 // to avoid this we can use omit
-type Size = "small" | "large" | Omit<string, "small" | "large">;
+type Size = LooseAutoComplete<"large" | "small">;
 
 function getNumber2(size: Size): number {
   // return number beased on size if large number return large number
@@ -28,3 +28,5 @@ function getNumber2(size: Size): number {
 // getNumber2("large");
 // getNumber2("small");
 // getNumber2("");
+
+export type LooseAutoComplete<T extends string> = Omit<String, T>;
