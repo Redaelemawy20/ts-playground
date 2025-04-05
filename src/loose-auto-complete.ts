@@ -3,7 +3,7 @@
 type SizeType = "small" | "large" | string;
 
 function getNumber(size: SizeType): number {
-  // return number beased on size if large number return large number
+  // return number based on size if large number return large number
   if (size == "large") {
     return 10;
   }
@@ -18,7 +18,7 @@ function getNumber(size: SizeType): number {
 type Size = LooseAutoComplete<"large" | "small">;
 
 function getNumber2(size: Size): number {
-  // return number beased on size if large number return large number
+  // return number based on size if large number return large number
   if (size == "large") {
     return 10;
   }
