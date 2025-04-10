@@ -1,10 +1,10 @@
 /** this file is to test how to build loose auto-complete  in typescript*/
 
-type SizeType = "small" | "large" | string;
+type SizeType = 'small' | 'large' | string;
 
 function getNumber(size: SizeType): number {
   // return number based on size if large number return large number
-  if (size == "large") {
+  if (size == 'large') {
     return 10;
   }
   return 5;
@@ -15,16 +15,16 @@ function getNumber(size: SizeType): number {
 // getNumber("");
 
 // to avoid this we can use omit
-type Size = LooseAutoComplete<"large" | "small">;
+type Size = LooseAutoComplete<'large' | 'small'>;
 
 function getNumber2(size: Size): number {
   // return number based on size if large number return large number
-  if (size == "large") {
+  if (size == 'large') {
     return 10;
   }
   return 5;
 }
-// if we called the function here we lose auto completion
+// if we called the function here we get auto completion
 // getNumber2("large");
 // getNumber2("small");
 // getNumber2("");
