@@ -13,3 +13,12 @@ verifyDomain('http://localhost:3000');
 
 // ❌ Invalid
 // verifyDomain('http://localhost:5000');
+
+// using template string types
+
+type ValidUrl<T extends AccpetedPorts> = `http://localhost:${T}`;
+const verifyDomain2 = <T extends ValidUrl<AccpetedPorts>>(url: T) => {};
+// ✅ Valid
+verifyDomain2('http://localhost:3000');
+// ❌ Invalid
+// verifyDomain2('http://localhost:5000');
