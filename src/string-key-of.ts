@@ -42,7 +42,3 @@ function sendEvent<Type extends Action['type']>(
 sendEvent('LOG_IN', { email: '', password: '' });
 sendEvent('LOG_OUT');
 sendEvent('REGISTER', { email: '', password: '', name: '', age: 0 });
-
-const myObj: Record<string, string> = {};
-// tsConfig => noUncheckedIndexedAccess = false
-myObj.foo.length; // works but could lead to bugs if foo is not in the object
