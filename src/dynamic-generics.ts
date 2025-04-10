@@ -1,32 +1,44 @@
-/** this file is to test how to build loose auto-complete  in typescript*/
+/**
+ * This file demonstrates how to use conditional types to create a generic function that can extract a sub-set of a union type.
+ * The function sendEvent is a generic function that takes a type parameter Type.
+ *
+ * The function will only accept arguments that are a sub-set of the union type Action.
+ *
+ * The Extract utility type is used to extract the sub-set of Action that matches the type parameter Type.
+ *
+ * The extends keyword is used to define the inference of the Payload type.
+ *
+ * The function is then called with different type parameters to demonstrate that the correct sub-set of Action is inferred.
+ *
+ * */
 
-type SizeType = 'small' | 'large' | string;
+type Action =
+  | {
+      type: 'LOG_IN';
+      payload: {
+        email: string;
+        password: string;
+      };
+    }
+  | {
+      type: 'LOG_OUT';
+    }
+  | {
+      type: 'REGISTER';
+      payload: {
+        email: string;
+        password: string;
+        name: string;
+        age: number;
+      };
+    };
 
-function getNumber(size: SizeType): number {
-  // return number based on size if large number return large number
-  if (size == 'large') {
-    return 10;
-  }
-  return 5;
-}
-// if we called the function here we lose auto completion
-// getNumber("large");
-// getNumber("small");
-// getNumber("");
+function sendEvent<Type extends Action['type']>(
+  ...args: Extract<Action, { type: Type }> extends { payload: infer Payload }
+    ? [Type, Payload]
+    : [Type]
+) {}
 
-// to avoid this we can use omit
-type Size = LooseAutoComplete<'large' | 'small'>;
-
-function getNumber2(size: Size): number {
-  // return number based on size if large number return large number
-  if (size == 'large') {
-    return 10;
-  }
-  return 5;
-}
-// if we called the function here we get auto completion
-// getNumber2("large");
-// getNumber2("small");
-// getNumber2("");
-
-export type LooseAutoComplete<T extends string> = Omit<String, T>;
+sendEvent('LOG_IN', { email: '', password: '' });
+sendEvent('LOG_OUT');
+sendEvent('REGISTER', { email: '', password: '', name: '', age: 0 });
