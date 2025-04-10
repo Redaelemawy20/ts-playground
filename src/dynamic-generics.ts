@@ -42,3 +42,11 @@ function sendEvent<Type extends Action['type']>(
 sendEvent('LOG_IN', { email: '', password: '' });
 sendEvent('LOG_OUT');
 sendEvent('REGISTER', { email: '', password: '', name: '', age: 0 });
+
+// another example on dynamic generices callApi
+type Method = 'GET' | 'POST';
+const callApi = <T extends Method>(
+  ...args: T extends 'POST' ? [T, object] : [T]
+) => {};
+callApi('GET');
+callApi('POST', {});
