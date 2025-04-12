@@ -5,3 +5,14 @@ function handleData(input: unknown) {
     console.log(len);
   }
 }
+
+function safeParse(json: string): unknown {
+  try {
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+}
+
+const result = safeParse('{"name": "John"}');
+// result.name — not allowed till we check data
